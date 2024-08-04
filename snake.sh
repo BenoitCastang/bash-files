@@ -2,34 +2,31 @@
 
 windowlines=$(tput lines)
 windowcols=$(tput cols)
-snakeyposition=$(expr $windowlines / 2)
 snakexposition=$(expr $windowcols / 2)
-foodyposition=$((RANDOM % ($windowlines + 1 - 1) + 1))
-foodxposition=$((RANDOM % ($windowcols + 1 - 1) + 1))
+snakeyposition=$(expr $windowlines / 2)
+foodxposition=$((RANDOM % ($windowcols/2 + 1) * 2))
+foodyposition=$((RANDOM % $windowlines + 1))
 snakesize=1
+snakedrawing="  "
 tput civis
 while [ true ]; do
 	clear
+	echo "window y = $windowlines"
+	echo "window x = $windowcols"
 	echo "snake x = $snakexposition"
 	echo "snake y = $snakeyposition"
 	echo "food x = $foodxposition"
 	echo "food y = $foodyposition"
 	echo "snake size = $snakesize"
-	tput cup $foodxposition $foodyposition
+	tput cup $foodyposition $foodxposition
 	echo -en "\e[47m  \e[0m"
 	tput cup $snakeyposition $snakexposition
-	# for i in $(seq 1 $snakesize); do
-	# 	echo -en "\e[47m  \e[0m"
-	# done
-	if [ $snakesize -eq 1 ]; then
-		echo -en "\e[47m  \e[0m"
-	fi
-	if [ $snakesize -eq 2 ]; then
-		echo -en "\e[47m    \e[0m"
-	fi
-	if [ $snakesize -eq 3 ]; then
-		echo -en "\e[47m      \e[0m"
-	fi
+	echo -en "\e[41m  \e[0m"
+	echo -en "\e[47m"
+	for i in $(seq 1 $snakesize); do
+		echo -en "$snakedrawing"
+	done
+	echo -en "\e[0m"
 	read -n 1 -s key
 	if [[ $key == "j" || $key == "s" ]]; then
 		snakeyposition=$(expr $snakeyposition + 1)
@@ -46,7 +43,7 @@ while [ true ]; do
 	fi
 	if [[ $foodyposition -eq $snakeyposition && $foodxposition -eq $snakexposition ]]; then
 		snakesize=$(expr $snakesize + 1)
+		foodxposition=$((RANDOM % ($windowcols/2 + 1) * 2))
 		foodyposition=$((RANDOM % $windowlines + 1))
-		foodxposition=$((RANDOM % $windowcols + 1))
 	fi	
 done
