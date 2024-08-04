@@ -6,7 +6,7 @@ snakexposition=$(expr $windowcols / 2)
 snakeyposition=$(expr $windowlines / 2)
 foodxposition=$((RANDOM % ($windowcols/2 + 1) * 2))
 foodyposition=$((RANDOM % $windowlines + 1))
-snakesize=1
+snakesize=0
 snakedrawing="  "
 tput civis
 while [ true ]; do
