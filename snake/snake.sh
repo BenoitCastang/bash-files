@@ -1,5 +1,9 @@
 #!/bin/bash
 
+draw() {
+	tput cup $1 $2
+	echo -en 
+}
 windowlines=$(tput lines)
 windowcols=$(tput cols)
 snakexposition=$(expr $windowcols / 2)
