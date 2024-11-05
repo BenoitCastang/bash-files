@@ -20,4 +20,5 @@ draw_interface() {
 		echo -e "food y = $foodyposition\n"
 	fi
 	echo "snake size = $snakesize"
+	echo "snake orientation = $snakeorientation"
 }
