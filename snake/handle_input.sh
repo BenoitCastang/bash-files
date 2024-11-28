@@ -2,21 +2,20 @@
 
 handle_input() {
 	read -n 1 -s key
-	if [[ $key == "j" || $key == "s" ]]; then
-		snakeyposition=$(expr $snakeyposition + 1)
+	if [[ "$key" == "j" || "$key" == "s" ]]; then
+		(( snakeyposition++ ))
 		snakeorientation="down"
-	elif [[ $key == "k" || $key == "w" ]]; then
-		snakeyposition=$(expr $snakeyposition - 1)
+	elif [[ "$key" == "k" || "$key" == "w" ]]; then
+		(( snakeyposition-- ))
 		snakeorientation="up"
-	elif [[ $key == "h" || $key == "a" ]]; then
-		snakexposition=$(expr $snakexposition - 2)
+	elif [[ "$key" == "h" || "$key" == "a" ]]; then
+		(( snakexposition -= 2 ))
 		snakeorientation="left"
-	elif [[ $key == "l" || $key == "d" ]]; then
-		snakexposition=$(expr $snakexposition + 2)
+	elif [[ "$key" == "l" || "$key" == "d" ]]; then
+		(( snakexposition += 2 ))
 		snakeorientation="right"
-	elif [[ $key == "l" || $key == "d" ]]; then
-	elif [ $key == "q" ]; then
-		tput cnorm # restore cursor to its normal state
+	elif [ "$key" == "q" ]; then
+		tput cnorm
 		clear
 		exit
 	fi
