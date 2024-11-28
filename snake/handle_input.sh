@@ -1,5 +1,11 @@
 #!/bin/bash
 
+exit_snake() {
+	tput cnorm
+	clear
+	exit
+}
+
 handle_input() {
 	read -n 1 -s key
 	if [[ "$key" == "j" || "$key" == "s" ]]; then
@@ -15,8 +21,8 @@ handle_input() {
 		(( snakexposition += 2 ))
 		snakeorientation="right"
 	elif [ "$key" == "q" ]; then
-		tput cnorm
-		clear
-		exit
+		exit_snake
 	fi
 }
+
+trap "exit_snake" SIGINT

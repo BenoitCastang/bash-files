@@ -8,7 +8,7 @@ done
 set_initial_variables
 tput civis # make cursor invisible
 
-while [ true ]; do
+while true; do
 	clear
 	draw_interface
 	draw_food
