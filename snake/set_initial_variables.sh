@@ -21,3 +21,6 @@ set_initial_variables() {
 	snakedrawing="  "
 }
 
+## make the snake turn its body
+## make the snake go forward by itself
+## handle screen borders
